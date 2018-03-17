@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rss="http://purl.org/rss/1.0/"
+  xmlns:os="http://a9.com/-/spec/opensearch/1.1/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:bibo="http://purl.org/ontology/bibo/">
+
+  <rss:channel rdf:about="https://capitadiscovery.co.uk/islington/items.rss?query=The%20Martian%20AND%20author%3A%28Andy%20Weir%29%20AND%20format%3A%28book%29">
+    <rss:link rdf:resource="https://capitadiscovery.co.uk/islington/items.rss?query=The%20Martian%20AND%20author%3A%28Andy%20Weir%29%20AND%20format%3A%28book%29" />
+    <rss:title>Search results for The Martian AND author:(Andy Weir...</rss:title>
+    <os:startIndex>0</os:startIndex>
+    <os:itemsPerPage>10</os:itemsPerPage>
+    <os:totalResults>2</os:totalResults>
+    <rss:items rdf:resource="urn:uuid:10d61545-26ac-595e-97b9-32bcdb6f9569" />
+  </rss:channel>
+
+  <rdf:Seq rdf:about="urn:uuid:10d61545-26ac-595e-97b9-32bcdb6f9569">
+    <rdf:_1 rdf:resource="http://capitadiscovery.co.uk/islington/items/872958" />
+    <rdf:_2 rdf:resource="http://capitadiscovery.co.uk/islington/items/829265" />
+  </rdf:Seq>
+
+  <rss:item rdf:about="http://capitadiscovery.co.uk/islington/items/872958">
+    <rss:link>http://capitadiscovery.co.uk/islington/items/872958</rss:link>
+    <rss:title>The Martian</rss:title>
+    <rss:description>I&#039;m stranded on Mars. I have no way to communicate with Earth. I&#039;m in a habitat designed to last 31 days. If the oxygenator breaks down, I&#039;ll suffocate. If the water reclaimer breaks down, I&#039;ll die of thirst. If the hab breaches, I&#039;ll just kind of explode. If none of those things happen, I&#039;ll eventu</rss:description>
+    <dc:creator>Weir, Andy, author.</dc:creator>
+    <dcterms:language rdf:datatype="http://purl.org/dc/terms/ISO639-2">eng</dcterms:language>
+    <dc:format>Book</dc:format>
+    <dc:publisher>London: Del Rey, 2015</dc:publisher>
+    <dc:date>2015</dc:date>
+    <bibo:isbn>1785031139</bibo:isbn>
+    <bibo:isbn>9781785031137</bibo:isbn>
+    <bibo:eanucc13>9781785031137</bibo:eanucc13>
+    <dcterms:identifier>872958</dcterms:identifier>
+  </rss:item>
+
+  <rss:item rdf:about="http://capitadiscovery.co.uk/islington/items/829265">
+    <rss:link>http://capitadiscovery.co.uk/islington/items/829265</rss:link>
+    <rss:title>The Martian</rss:title>
+    <rss:description>I&#039;m stranded on Mars. I have no way to communicate with Earth. I&#039;m in a habitat designed to last 31 days. If the oxygenator breaks down, I&#039;ll suffocate. If the water reclaimer breaks down, I&#039;ll die of thirst. If the hab breaches, I&#039;ll just kind of explode. If none of those things happen, I&#039;ll eventu</rss:description>
+    <dc:creator>Weir, Andy, author.</dc:creator>
+    <dcterms:language rdf:datatype="http://purl.org/dc/terms/ISO639-2">eng</dcterms:language>
+    <dc:format>Book</dc:format>
+    <dc:publisher>UK: Del Rey, 2014</dc:publisher>
+    <dc:date>2014</dc:date>
+    <bibo:isbn>0091956145</bibo:isbn>
+    <bibo:isbn>9780091956141</bibo:isbn>
+    <bibo:eanucc13>9780091956141</bibo:eanucc13>
+    <dcterms:identifier>829265</dcterms:identifier>
+  </rss:item>
+
+</rdf:RDF>

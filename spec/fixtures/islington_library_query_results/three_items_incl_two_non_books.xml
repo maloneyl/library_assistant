@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rss="http://purl.org/rss/1.0/"
+  xmlns:os="http://a9.com/-/spec/opensearch/1.1/"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:bibo="http://purl.org/ontology/bibo/">
+
+  <!-- the actual search returned 2 non-book items; 3rd result added just to test non-book filtering -->
+  <rss:channel rdf:about="https://capitadiscovery.co.uk/islington/items.rss?query=Book%20of%20Peoples%20of%20the%20World%3A%20A%20Guide%20to%20Cultures%20AND%20author%3A%28Wade%20Davis%29%20AND%20format%3A%28book%29">
+    <rss:link rdf:resource="https://capitadiscovery.co.uk/islington/items.rss?query=Book%20of%20Peoples%20of%20the%20World%3A%20A%20Guide%20to%20Cultures%20AND%20author%3A%28Wade%20Davis%29%20AND%20format%3A%28book%29" />
+    <rss:title>Search results for Book of Peoples of the World: A...</rss:title>
+    <os:startIndex>0</os:startIndex>
+    <os:itemsPerPage>10</os:itemsPerPage>
+    <os:totalResults>3</os:totalResults>
+    <rss:items rdf:resource="urn:uuid:d443dc89-d4b8-5d63-a331-b025af95df23" />
+  </rss:channel>
+
+  <rdf:Seq rdf:about="urn:uuid:d443dc89-d4b8-5d63-a331-b025af95df23">
+    <rdf:_1 rdf:resource="http://capitadiscovery.co.uk/islington/items/751529" />
+    <rdf:_2 rdf:resource="http://capitadiscovery.co.uk/islington/items/873925" />
+    <rdf:_3 rdf:resource="http://capitadiscovery.co.uk/islington/items/000000" />
+  </rdf:Seq>
+
+  <rss:item rdf:about="http://capitadiscovery.co.uk/islington/items/751529">
+    <rss:link>http://capitadiscovery.co.uk/islington/items/751529</rss:link>
+    <rss:title>King Tubby&#039;s in Fine Style</rss:title>
+    <dcterms:language rdf:datatype="http://purl.org/dc/terms/ISO639-2">eng</dcterms:language>
+    <dc:format>CD</dc:format>
+    <dc:publisher>Trojan, 2008</dc:publisher>
+    <dc:date>2008</dc:date>
+    <bibo:eanucc13>5050159906321</bibo:eanucc13>
+    <dcterms:identifier>751529</dcterms:identifier>
+  </rss:item>
+
+  <rss:item rdf:about="http://capitadiscovery.co.uk/islington/items/873925">
+    <rss:link>http://capitadiscovery.co.uk/islington/items/873925</rss:link>
+    <rss:title>Patriots day</rss:title>
+    <rss:description>Mark Wahlberg and Kevin Bacon star in this drama based on the events surrounding the 2013 Boston Marathon bombings. With the streets of central Boston lined with people supporting the runners as they complete the final stages of the race, brothers Tamerlan and Dzhokhar Tsarnaev (Themo Melikidze and </rss:description>
+    <dc:contributor>Berg, Peter, 1964- director.</dc:contributor>
+    <dc:contributor>Jablonsky, Steve, music.</dc:contributor>
+    <dc:contributor>Benoist, Melissa, actor.</dc:contributor>
+    <dc:contributor>Wahlberg, Mark, 1971- actor.</dc:contributor>
+    <dc:contributor>Monaghan, Michelle, actor.</dc:contributor>
+    <dcterms:language rdf:datatype="http://purl.org/dc/terms/ISO639-2">eng</dcterms:language>
+    <dc:format>DVD</dc:format>
+    <dc:publisher>Lionsgate UK, 2017</dc:publisher>
+    <dc:date>2017</dc:date>
+    <bibo:eanucc13>5055761909852</bibo:eanucc13>
+    <dcterms:identifier>873925</dcterms:identifier>
+  </rss:item>
+
+  <rss:item rdf:about="http://capitadiscovery.co.uk/islington/items/000000">
+    <rss:link>http://capitadiscovery.co.uk/islington/items/000000</rss:link>
+    <rss:title>The Fake Book</rss:title>
+    <rss:description>This is a fake book I am adding to the result, just so I can test that the non-book filtering works.</rss:description>
+    <dc:creator>McAuthor, Authy, author.</dc:creator>
+    <dcterms:language rdf:datatype="http://purl.org/dc/terms/ISO639-2">eng</dcterms:language>
+    <dc:format>Book</dc:format>
+    <dc:publisher>UK: Del Rey, 2014</dc:publisher>
+    <dc:date>2014</dc:date>
+    <bibo:isbn>0012345678</bibo:isbn>
+    <bibo:isbn>1230012345678</bibo:isbn>
+    <bibo:eanucc13>1230012345678</bibo:eanucc13>
+    <dcterms:identifier>000000</dcterms:identifier>
+  </rss:item>
+</rdf:RDF>
