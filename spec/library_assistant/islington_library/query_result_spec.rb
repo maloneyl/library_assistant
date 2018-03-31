@@ -1,5 +1,5 @@
-require "nokogiri"
-require_relative "../../../lib/library_assistant/islington_library/query_result"
+# require "nokogiri"
+# require_relative "../../../lib/library_assistant/islington_library/query_result"
 
 RSpec.describe LibraryAssistant::IslingtonLibrary::QueryResult do
   subject { described_class.new(parsed_query_result_xml) }

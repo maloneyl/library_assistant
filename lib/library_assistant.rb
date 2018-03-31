@@ -6,11 +6,11 @@ module LibraryAssistant
   def self.grab_a_book
     found = false
 
-    result = Goodreads.get_books.each do |goodreads_book|
-      book = IslingtonLibrary.search(title: goodreads_book.title, author: goodreads_book.author)
-      if book
-        found = true
-        break book
+    result = Goodreads.generate_book_requests.each do |request|
+      request.library_result = IslingtonLibrary.search(title: request.title, author: request.author)
+
+      if found = request.found?
+        break request.library_result
       end
     end
 

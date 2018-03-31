@@ -9,7 +9,7 @@ module LibraryAssistant
 
     class << self
       def search(title:, author:)
-        new(title, author).search
+        new(title, author).search_result
       end
     end
 
@@ -18,7 +18,7 @@ module LibraryAssistant
       @author = author
     end
 
-    def search
+    def search_result
       QueryResult.new(parsed_query_result_xml).book
     end
 
