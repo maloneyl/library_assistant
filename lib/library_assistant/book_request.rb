@@ -1,3 +1,5 @@
+require "library_assistant/islington_library"
+
 module LibraryAssistant
   class BookRequest
     def initialize(title:, author:, image_url:, average_rating:)
@@ -15,6 +17,11 @@ module LibraryAssistant
       return false unless @library_search_result
 
       @library_search_result.book?
+    end
+
+    def perform_library_search!
+      @library_search_result = IslingtonLibrary.search(title: @title, author: @author)
+      self
     end
   end
 end
