@@ -1,5 +1,5 @@
 module GoodreadsHelper
-  def sample_data_of_books_fetched_from_goodreads_shelf
+  def sample_result_of_fetching_books_from_goodreads_shelf
     [
       Hashie::Mash.new({
         "id"=>"2327186297",

@@ -1,4 +1,4 @@
-require "library_assistant/book"
+require "library_assistant/islington_library/book"
 
 module LibraryAssistant
   class IslingtonLibrary
