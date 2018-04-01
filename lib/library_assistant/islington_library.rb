@@ -1,7 +1,7 @@
 require "nokogiri"
 require "addressable"
 require "open-uri"
-require "library_assistant/islington_library/query_result"
+require "library_assistant/islington_library/query_result_interpreter"
 
 module LibraryAssistant
   class IslingtonLibrary
@@ -19,7 +19,7 @@ module LibraryAssistant
     end
 
     def search_result
-      QueryResult.new(parsed_query_result_xml).book
+      QueryResultInterpreter.new(parsed_query_result_xml).result
     end
 
     private
