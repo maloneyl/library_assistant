@@ -4,13 +4,7 @@ RSpec.describe LibraryAssistant do
   end
 
   describe ".grab_a_book" do
-    let(:book_requests) do
-      [
-        described_class::BookRequest.new(title: "A", author: "B", image_url: "C", average_rating: "D"),
-        described_class::BookRequest.new(title: "H", author: "I", image_url: "J", average_rating: "K"),
-        described_class::BookRequest.new(title: "W", author: "X", image_url: "Y", average_rating: "Z")
-      ]
-    end
+    let(:book_requests) { build_list(:book_request, 3) }
 
     let(:expected_book) do
       described_class::IslingtonLibrary::Book.new(

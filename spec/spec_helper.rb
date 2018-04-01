@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "library_assistant"
+require "support/factory_bot"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
