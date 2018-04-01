@@ -1,4 +1,4 @@
-RSpec.describe LibraryAssistant::IslingtonLibrary::QueryResult do
+RSpec.describe LibraryAssistant::IslingtonLibrary::QueryResultInterpreter do
   subject { described_class.new(parsed_query_result_xml) }
 
   let(:parsed_query_result_xml) do
@@ -14,25 +14,25 @@ RSpec.describe LibraryAssistant::IslingtonLibrary::QueryResult do
     end
   end
 
-  describe "#book" do
+  describe "#result" do
     context "when there are book items" do
       let(:query_result_file_path) { "../../fixtures/islington_library_query_results/two_items.xml" }
 
       it "returns the newer book" do
-        book = described_class.new(parsed_query_result_xml).book
+        result = described_class.new(parsed_query_result_xml).result
 
-        expect(book.year).to eq("2015")
-        expect(book.link).to eq("http://capitadiscovery.co.uk/islington/items/872958")
+        expect(result.book.year).to eq("2015")
+        expect(result.book.link).to eq("http://capitadiscovery.co.uk/islington/items/872958")
       end
     end
 
     context "when there are no book items" do
       let(:query_result_file_path) { "../../fixtures/islington_library_query_results/zero_items.xml" }
 
-      it "returns nil" do
-        book = described_class.new(parsed_query_result_xml).book
+      it "returns a result with no book" do
+        result = described_class.new(parsed_query_result_xml).result
 
-        expect(book).to be_nil
+        expect(result.book).to be_nil
       end
     end
   end

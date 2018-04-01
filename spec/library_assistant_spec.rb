@@ -23,9 +23,11 @@ RSpec.describe LibraryAssistant do
       allow(described_class::Goodreads).to receive(:generate_book_requests).
         and_return(book_requests)
       allow(described_class::IslingtonLibrary).to receive(:search).
-        with(title: book_requests[0].title, author: book_requests[0].author).and_return(nil)
+        with(title: book_requests[0].title, author: book_requests[0].author).
+        and_return(described_class::LibrarySearchResult.new)
       allow(described_class::IslingtonLibrary).to receive(:search).
-        with(title: book_requests[1].title, author: book_requests[1].author).and_return(expected_book)
+        with(title: book_requests[1].title, author: book_requests[1].author).
+        and_return(described_class::LibrarySearchResult.new(expected_book))
     end
 
     it "returns the first book from the Goodreads shelf that is available from the library" do

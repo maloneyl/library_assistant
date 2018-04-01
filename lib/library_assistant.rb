@@ -7,10 +7,10 @@ module LibraryAssistant
     found = false
 
     result = Goodreads.generate_book_requests.each do |request|
-      request.library_result = IslingtonLibrary.search(title: request.title, author: request.author)
+      request.library_search_result = IslingtonLibrary.search(title: request.title, author: request.author)
 
-      if found = request.found?
-        break request.library_result
+      if found = request.book_found?
+        break request.library_search_result.book
       end
     end
 

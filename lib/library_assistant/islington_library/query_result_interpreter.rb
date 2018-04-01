@@ -1,22 +1,25 @@
+require "library_assistant/library_search_result"
 require "library_assistant/islington_library/book"
 
 module LibraryAssistant
   class IslingtonLibrary
-    class QueryResult
+    class QueryResultInterpreter
       def initialize(parsed_query_result_xml)
         @doc = parsed_query_result_xml
 
         filter_to_books_only
       end
 
-      def book
-        return nil unless any?
+      def result
+        return LibrarySearchResult.new unless any?
 
-        Book.new(
-          title: value_for_newest_item("rss:title"),
-          author: value_for_newest_item("dc:creator"),
-          year: value_for_newest_item("dc:date"),
-          link: value_for_newest_item("rss:link")
+        LibrarySearchResult.new(
+          Book.new(
+            title: value_for_newest_item("rss:title"),
+            author: value_for_newest_item("dc:creator"),
+            year: value_for_newest_item("dc:date"),
+            link: value_for_newest_item("rss:link")
+          )
         )
       end
 
