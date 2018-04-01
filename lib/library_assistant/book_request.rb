@@ -8,7 +8,8 @@ module LibraryAssistant
       @library_result = nil
     end
 
-    attr_accessor :title, :author, :image_url, :average_rating, :library_result
+    attr_reader :title, :author, :image_url, :average_rating
+    attr_accessor :library_result
 
     def found?
       @library_result.present?
