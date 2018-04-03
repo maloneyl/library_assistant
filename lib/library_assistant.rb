@@ -16,10 +16,11 @@ module LibraryAssistant
     book
   end
 
-  def self.generate_and_filter_book_requests
-    generate_book_requests.
-      map(&:perform_library_search!).
-      select(&:book_found?)
+  def self.generate_and_handle_book_requests(filter: false)
+    book_requests = generate_book_requests.map(&:perform_library_search!)
+    return book_requests unless filter
+
+    book_requests.select(&:book_found?)
   end
 
   def self.generate_book_requests

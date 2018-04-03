@@ -47,19 +47,30 @@ RSpec.describe LibraryAssistant do
     end
   end
 
-  describe ".generate_and_filter_book_requests" do
+  describe ".generate_and_handle_book_requests" do
     include_context "3 books from Goodreads shelf; last 2 found in Islington Library"
 
-    it "creates book requests from Goodreads and returns only the ones with books found in the library" do
-      resulting_book_requests = described_class.generate_and_filter_book_requests
+    it "creates and handles book requests" do
+      resulting_book_requests = described_class.generate_and_handle_book_requests
 
-      expect(resulting_book_requests.length).to eq(2)
+      expect(resulting_book_requests.length).to eq(3)
+      resulting_book_requests.each do |request|
+        expect(request.library_search_result).to be_present
+      end
+    end
 
-      expect(resulting_book_requests.first.title).to eq(book_requests[1].title)
-      expect(resulting_book_requests.first.library_search_result).to eq(library_search_results[1])
+    context "when called with filter=true" do
+      it "returns only the ones with books found in the library" do
+        resulting_book_requests = described_class.generate_and_handle_book_requests(filter: true)
 
-      expect(resulting_book_requests.last.title).to eq(book_requests[2].title)
-      expect(resulting_book_requests.last.library_search_result).to eq(library_search_results[2])
+        expect(resulting_book_requests.length).to eq(2)
+
+        expect(resulting_book_requests.first.title).to eq(book_requests[1].title)
+        expect(resulting_book_requests.first.library_search_result).to eq(library_search_results[1])
+
+        expect(resulting_book_requests.last.title).to eq(book_requests[2].title)
+        expect(resulting_book_requests.last.library_search_result).to eq(library_search_results[2])
+      end
     end
   end
 end
