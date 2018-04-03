@@ -14,7 +14,7 @@ RSpec.describe LibraryAssistant::Goodreads do
       expect(LibraryAssistant::BookRequest).to receive(:new).with(
         title: "A Brief History of Time",
         author: "Stephen Hawking",
-        image_url: "https://images.gr-assets.com/books/1333578746m/3869.jpg",
+        image_url: "https://images.gr-assets.com/books/1333578746l/3869.jpg",
         average_rating: "4.13"
       )
 
@@ -28,7 +28,7 @@ RSpec.describe LibraryAssistant::Goodreads do
       expect(LibraryAssistant::BookRequest).to receive(:new).with(
         title: "Internal Time: Chronotypes, Social Jet Lag, and Why You're So Tired",
         author: "Till Roenneberg",
-        image_url: "https://images.gr-assets.com/books/1334176383m/13598053.jpg",
+        image_url: "https://images.gr-assets.com/books/1334176383l/13598053.jpg",
         average_rating: "3.69"
       )
 
