@@ -39,5 +39,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "dotenv"
   spec.add_runtime_dependency "addressable"
   spec.add_runtime_dependency "nokogiri"
-  spec.add_runtime_dependency "goodreads"
+  spec.add_runtime_dependency "goodreads", "~> 0.6"
 end
