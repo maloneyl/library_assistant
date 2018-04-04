@@ -23,9 +23,16 @@ module LibraryAssistant
         {
           title: data.book.title,
           author: data.book.authors.author.name,
-          image_url: data.book.image_url,
+          image_url: data.book.large_image_url || image_url_hack(data.book.image_url),
           average_rating: data.book.average_rating
         }
+      end
+
+      def image_url_hack(image_url)
+        matches = image_url.match(/(https:\/\/images.gr-assets.com\/books\/\d+)(m)(.+)/)
+        return image_url unless matches
+
+        matches[1] + "l" + matches[3]
       end
     end
   end

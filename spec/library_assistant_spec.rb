@@ -3,39 +3,73 @@ RSpec.describe LibraryAssistant do
     expect(LibraryAssistant::VERSION).not_to be nil
   end
 
-  describe ".grab_a_book" do
+  shared_context "3 books from Goodreads shelf; last 2 found in Islington Library" do
+    before do
+      allow(described_class).to receive(:generate_book_requests).
+        and_return(book_requests)
+
+      book_requests.each_with_index do |book_request, i|
+        allow(book_request).to receive(:perform_library_search!).
+          and_return(processed_book_requests[i])
+      end
+    end
+
     let(:book_requests) { build_list(:book_request, 3) }
 
-    let(:expected_book) do
-      described_class::IslingtonLibrary::Book.new(
-        title: book_requests[1].title, author: book_requests[1].author,
-        year: Object.new, link: Object.new
-      )
+    let(:library_search_results) do
+      [
+        build(:library_search_result),
+        build(:library_search_result, :with_book),
+        build(:library_search_result, :with_book)
+      ]
     end
 
-    before do
-      allow(described_class::Goodreads).to receive(:generate_book_requests).
-        and_return(book_requests)
-      allow(described_class::IslingtonLibrary).to receive(:search).
-        with(title: book_requests[0].title, author: book_requests[0].author).
-        and_return(described_class::LibrarySearchResult.new)
-      allow(described_class::IslingtonLibrary).to receive(:search).
-        with(title: book_requests[1].title, author: book_requests[1].author).
-        and_return(described_class::LibrarySearchResult.new(expected_book))
+    let(:processed_book_requests) do
+      book_requests.each_with_index do |book_request, i|
+        book_request.library_search_result = library_search_results[i]
+      end
     end
+  end
+
+  describe ".grab_a_book" do
+    include_context "3 books from Goodreads shelf; last 2 found in Islington Library"
 
     it "returns the first book from the Goodreads shelf that is available from the library" do
-      expect(described_class.grab_a_book).to eq(expected_book)
+      expect(described_class.grab_a_book).to eq(library_search_results[1].book)
     end
 
     context "when the library doesn't have any of those books" do
-      before do
-        allow(described_class::IslingtonLibrary).to receive(:search).
-          and_return(nil)
-      end
+      let(:library_search_results) { build_list(:library_search_result, 3, :without_book) }
 
       it "returns nil" do
         expect(described_class.grab_a_book).to be_nil
+      end
+    end
+  end
+
+  describe ".generate_and_handle_book_requests" do
+    include_context "3 books from Goodreads shelf; last 2 found in Islington Library"
+
+    it "creates and handles book requests" do
+      resulting_book_requests = described_class.generate_and_handle_book_requests
+
+      expect(resulting_book_requests.length).to eq(3)
+      resulting_book_requests.each do |request|
+        expect(request.library_search_result).to be_present
+      end
+    end
+
+    context "when called with filter=true" do
+      it "returns only the ones with books found in the library" do
+        resulting_book_requests = described_class.generate_and_handle_book_requests(filter: true)
+
+        expect(resulting_book_requests.length).to eq(2)
+
+        expect(resulting_book_requests.first.title).to eq(book_requests[1].title)
+        expect(resulting_book_requests.first.library_search_result).to eq(library_search_results[1])
+
+        expect(resulting_book_requests.last.title).to eq(book_requests[2].title)
+        expect(resulting_book_requests.last.library_search_result).to eq(library_search_results[2])
       end
     end
   end
