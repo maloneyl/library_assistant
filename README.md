@@ -1,8 +1,8 @@
 # LibraryAssistant ![](https://travis-ci.org/maloneyl/library_assistant.svg?branch=master)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/library_assistant`. To experiment with that code, run `bin/console` for an interactive prompt.
+This is a little pet project that helps me manage my reading and gives me something to experiment with. 
 
-TODO: Delete this and the text above, and describe your gem
+I read a lot and get almost all of my books from the library. As much as I love my local library (hi, Islington 👋🏽), its website leaves a lot to be desired. It was also getting a bit silly how often I'd look up a book on both Goodreads (to check reviews and add to my to-read shelf) and the library catalogue (to see if the book's even stocked), so I thought I should try to automate that process.
 
 ## Installation
 
@@ -22,7 +22,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+See `.env.example` for the required `.env` setup.
+
+All `LibraryAssistant` methods involve first getting the most recently added books (up to 20) on the Goodreads shelf specified in your `.env`:
+
+* `LibraryAssistant.grab_a_book` returns the first book found in the Islington library catalogue (see [library-assistant-cli](github.com/maloneyl/library-assistant-cli) for how I use it, which was how this project started). 
+
+* `LibraryAssistant.generate_and_handle_book_requests` returns processed book requests with their library search results. Calling the method with `filter: true` filters the book requests to those with positive search results (see [library-assistant-web](github.com/maloneyl/library-assistant-web) for an example).
 
 ## Development
 
