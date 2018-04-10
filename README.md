@@ -26,9 +26,9 @@ See `.env.example` for the required `.env` setup.
 
 All `LibraryAssistant` methods involve first getting the most recently added books (up to 20) on the Goodreads shelf specified in your `.env`:
 
-* `LibraryAssistant.grab_a_book` returns the first book found in the Islington library catalogue (see [library-assistant-cli](github.com/maloneyl/library-assistant-cli) for how I use it, which was how this project started). 
+* `LibraryAssistant.grab_a_book` returns the first book found in the Islington library catalogue (see [library-assistant-cli](https://github.com/maloneyl/library-assistant-cli) for how I use it, which was how this project started). 
 
-* `LibraryAssistant.generate_and_handle_book_requests` returns processed book requests with their library search results. Calling the method with `filter: true` filters the book requests to those with positive search results (see [library-assistant-web](github.com/maloneyl/library-assistant-web) for an example).
+* `LibraryAssistant.generate_and_handle_book_requests` returns processed book requests with their library search results. Calling the method with `filter: true` filters the book requests to those with positive search results (see [library-assistant-web](https://github.com/maloneyl/library-assistant-web) for an example).
 
 ## Development
 
