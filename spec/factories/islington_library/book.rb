@@ -4,6 +4,7 @@ FactoryBot.define do
     author { Faker::Book.author }
     year { rand(1900..2018) }
     link { Faker::Internet.url }
+    isbn { Faker::Number.number(13) }
 
     initialize_with { new(attributes) }
   end
