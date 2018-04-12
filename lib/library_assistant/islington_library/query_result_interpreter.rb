@@ -18,7 +18,8 @@ module LibraryAssistant
             title: value_for_newest_item("rss:title"),
             author: value_for_newest_item("dc:creator"),
             year: value_for_newest_item("dc:date"),
-            link: value_for_newest_item("rss:link")
+            link: value_for_newest_item("rss:link"),
+            isbn: value_for_newest_item("bibo:isbn")
           )
         )
       end
@@ -48,7 +49,7 @@ module LibraryAssistant
       end
 
       def value_for_newest_item(xpath)
-        newest_item.xpath(xpath).text
+        newest_item.xpath(xpath).first.text
       end
     end
   end

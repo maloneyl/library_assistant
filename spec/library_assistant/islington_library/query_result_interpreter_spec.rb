@@ -23,6 +23,9 @@ RSpec.describe LibraryAssistant::IslingtonLibrary::QueryResultInterpreter do
 
         expect(result.book.year).to eq("2015")
         expect(result.book.link).to eq("http://capitadiscovery.co.uk/islington/items/872958")
+        expect(result.book.isbn).to eq("1785031139")
+        expect(result.book.title).to eq("The Martian")
+        expect(result.book.author).to eq("Weir, Andy, author.")
       end
     end
 
