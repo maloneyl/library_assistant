@@ -5,12 +5,14 @@ require "library_assistant/book_request"
 module LibraryAssistant
   class Goodreads
     class << self
-      def get_books_from_shelf
-        client.shelf(ENV["GOODREADS_USER_ID"], ENV["GOODREADS_SHELF_NAME"]).books
+      def get_books_from_shelf(page:)
+        client.shelf(ENV["GOODREADS_USER_ID"], ENV["GOODREADS_SHELF_NAME"], page: page).books
       end
 
-      def generate_book_requests
-        get_books_from_shelf.map { |data| BookRequest.new(extracted_book_data(data)) }
+      def generate_book_requests(page: 1)
+        get_books_from_shelf(page: page).map do |data|
+          BookRequest.new(extracted_book_data(data))
+        end
       end
 
       private

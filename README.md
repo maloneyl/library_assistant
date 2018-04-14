@@ -1,6 +1,6 @@
 # LibraryAssistant ![](https://travis-ci.org/maloneyl/library_assistant.svg?branch=master)
 
-This is a little pet project that helps me manage my reading and gives me something to experiment with. 
+This is a little pet project that helps me manage my reading and gives me something to experiment with.
 
 I read a lot and get almost all of my books from the library. As much as I love my local library (hi, Islington 👋🏽), its website leaves a lot to be desired. It was also getting a bit silly how often I'd look up a book on both Goodreads (to check reviews and add to my to-read shelf) and the library catalogue (to see if the book's even stocked), so I thought I should try to automate that process.
 
@@ -22,13 +22,17 @@ Or install it yourself as:
 
 ## Usage
 
-See `.env.example` for the required `.env` setup.
+See `.env.example` for the required `.env` setup. The Goodreads credentials involved are an API key, a user ID, and the name of a shelf associated with that user ID.
 
 All `LibraryAssistant` methods involve first getting the most recently added books (up to 20) on the Goodreads shelf specified in your `.env`:
 
-* `LibraryAssistant.grab_a_book` returns the first book found in the Islington library catalogue (see [library-assistant-cli](https://github.com/maloneyl/library-assistant-cli) for how I use it, which was how this project started). 
+* `LibraryAssistant.grab_a_book` returns the first book found in the Islington library catalogue. See [library-assistant-cli](https://github.com/maloneyl/library-assistant-cli) for how I use it, which was how this project started.
 
-* `LibraryAssistant.generate_and_handle_book_requests` returns processed book requests with their library search results. Calling the method with `filter: true` filters the book requests to those with positive search results (see [library-assistant-web](https://github.com/maloneyl/library-assistant-web) for an example).
+* `LibraryAssistant.generate_and_process_book_requests` returns processed book requests with their library search results. By default, only the ones with books found are returned. You can pass the method the following options:
+
+  * `include_all: true`: To get back all processed book requests, including ones with bookless search results.
+
+  * `desired_book_count: {number}`: To _attempt_ to get at least that many processed book requests with library books found, looking beyond the first 20 Goodsreads books if needed. See [library-assistant-web](https://github.com/maloneyl/library-assistant-web) for an example.
 
 ## Development
 

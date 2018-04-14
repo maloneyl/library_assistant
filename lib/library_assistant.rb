@@ -3,27 +3,43 @@ require "library_assistant/goodreads"
 
 module LibraryAssistant
   def self.grab_a_book
-    book = nil
-    book_requests = generate_book_requests
+    resulting_book_requests = generate_and_process_book_requests(desired_book_count: 1)
 
-    while !book && book_requests.any?
-      book_request = book_requests.first
-      book_request.perform_library_search!
-      book = book_request.library_search_result.book
-      book_requests.delete(book_request)
+    return nil if resulting_book_requests.empty?
+
+    resulting_book_requests.first.library_search_result.book
+  end
+
+  def self.generate_and_process_book_requests(opts = {})
+    processed_book_requests = do_work(opts[:desired_book_count])
+
+    return processed_book_requests if opts[:include_all]
+
+    processed_book_requests.select(&:book_found?)
+  end
+
+  private
+
+  def self.do_work(desired_book_count=nil, found_book_count=0, goodreads_shelf_page=1, processed_book_requests=[])
+    desired_book_count = nil if desired_book_count && desired_book_count < 1
+
+    book_requests = generate_book_requests(page: goodreads_shelf_page)
+    return processed_book_requests if book_requests.empty?
+
+    book_requests.each do |book_request|
+      processed_book_requests << book_request.perform_library_search!
+      found_book_count += 1 if book_request.book_found?
+      break if found_book_count == desired_book_count
     end
 
-    book
+    if (desired_book_count.nil?) || (found_book_count == desired_book_count)
+      return processed_book_requests
+    end
+
+    do_work(desired_book_count, found_book_count, goodreads_shelf_page+1, processed_book_requests)
   end
 
-  def self.generate_and_handle_book_requests(filter: false)
-    book_requests = generate_book_requests.map(&:perform_library_search!)
-    return book_requests unless filter
-
-    book_requests.select(&:book_found?)
-  end
-
-  def self.generate_book_requests
-    Goodreads.generate_book_requests
+  def self.generate_book_requests(page: 1)
+    Goodreads.generate_book_requests(page: page)
   end
 end
