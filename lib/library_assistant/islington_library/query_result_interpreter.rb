@@ -4,6 +4,8 @@ require "library_assistant/islington_library/book"
 module LibraryAssistant
   class IslingtonLibrary
     class QueryResultInterpreter
+      KNOWN_BOOK_FORMATS = ["Book", "Hardback", "Paperback", "Large print"].freeze
+
       def initialize(parsed_query_result_xml)
         @doc = parsed_query_result_xml
 
@@ -29,9 +31,9 @@ module LibraryAssistant
       def filter_to_books_only
         return unless any?
 
-        @doc.xpath("//rss:item/dc:format").each do |node|
-          unless node.text == "Book"
-            node.parent.remove
+        @doc.xpath("//rss:item/dc:format").each do |element|
+          unless KNOWN_BOOK_FORMATS.include?(element.text)
+            element.parent.remove
           end
         end
       end
