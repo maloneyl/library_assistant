@@ -10,7 +10,7 @@ RSpec.describe LibraryAssistant::IslingtonLibrary::QueryResultInterpreter do
 
     it "filters out non-book items" do
       expect(subject.instance_variable_get(:@doc).xpath("//rss:item").count).to eq(1)
-      expect(subject.instance_variable_get(:@doc).xpath("//rss:item/dc:format").text).to eq("Book")
+      expect(subject.instance_variable_get(:@doc).xpath("//rss:item/dc:format").text).to eq("HardbackBook")
     end
   end
 
