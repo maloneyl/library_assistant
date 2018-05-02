@@ -30,7 +30,7 @@ module LibraryAssistant
 
     def search_url_with_query
       uri = Addressable::URI.parse(BASE_SEARCH_URL)
-      uri.query_values = {query: "#{@title} #{@author} AND format:(book)"}
+      uri.query_values = {query: "\"#{@title}\" #{@author} AND format:(book)"}
       uri.to_s
     end
   end
