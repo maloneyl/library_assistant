@@ -1,19 +1,22 @@
 require "library_assistant/library_search_result"
 require "library_assistant/islington_library/book"
+require "fuzzystringmatch"
 
 module LibraryAssistant
   class IslingtonLibrary
     class QueryResultInterpreter
       KNOWN_BOOK_FORMATS = ["Book", "Hardback", "Paperback", "Large print"].freeze
+      ACCEPTED_JARO_WINKLER_DISTANCE = 0.8
 
-      def initialize(parsed_query_result_xml)
-        @doc = parsed_query_result_xml
+      def initialize(doc:, requested_title:)
+        @doc = doc
+        @requested_title = requested_title
 
-        filter_to_books_only
+        screen_out_unwanted_items
       end
 
       def result
-        return LibrarySearchResult.new unless any?
+        return LibrarySearchResult.new unless items.any?
 
         LibrarySearchResult.new(
           Book.new(
@@ -28,18 +31,23 @@ module LibraryAssistant
 
       private
 
-      def filter_to_books_only
-        return unless any?
+      def screen_out_unwanted_items
+        return unless items.any?
 
-        @doc.xpath("//rss:item/dc:format").each do |element|
-          unless KNOWN_BOOK_FORMATS.include?(element.text)
-            element.parent.remove
+        items.each do |element|
+          unless format_matches?(element.xpath("dc:format").map(&:text))
+            element.remove
+            next
+          end
+
+          unless title_matches?(element.xpath("rss:title").text)
+            element.remove
           end
         end
       end
 
-      def any?
-        @doc.xpath("//rss:item").any?
+      def items
+        @doc.xpath("//rss:item")
       end
 
       def newest_item
@@ -52,6 +60,22 @@ module LibraryAssistant
 
       def value_for_newest_item(xpath)
         newest_item.xpath(xpath).first.text
+      end
+
+      def format_matches?(item_formats)
+        (KNOWN_BOOK_FORMATS & item_formats).any?
+      end
+
+      def title_matches?(item_title)
+        jaro_winkler_distance(item_title) >= ACCEPTED_JARO_WINKLER_DISTANCE
+      end
+
+      def jaro_winkler_distance(item_title)
+        fuzzy_string_match.getDistance(item_title.downcase, @requested_title.downcase)
+      end
+
+      def fuzzy_string_match
+        @fuzzy_string_match ||= FuzzyStringMatch::JaroWinkler.create(:native)
       end
     end
   end

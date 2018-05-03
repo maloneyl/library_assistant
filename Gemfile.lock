@@ -4,12 +4,16 @@ PATH
     library_assistant (0.1.0)
       addressable (~> 2.5)
       dotenv (~> 2.2)
+      fuzzy-string-match (~> 1.0)
       goodreads (~> 0.6)
       nokogiri (~> 1.8)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    RubyInline (3.12.4)
+      ZenTest (~> 4.3)
+    ZenTest (4.11.1)
     activesupport (5.1.5)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
@@ -28,6 +32,8 @@ GEM
       activesupport (>= 3.0.0)
     faker (1.8.7)
       i18n (>= 0.7)
+    fuzzy-string-match (1.0.1)
+      RubyInline (>= 3.8.6)
     goodreads (0.6.1)
       activesupport (>= 3.0)
       hashie (~> 2.0)
