@@ -14,12 +14,15 @@ module LibraryAssistant
     end
 
     def initialize(title, author)
-      @title = title.split(": ").first
+      @title = title
       @author = author
     end
 
     def search_result
-      QueryResultInterpreter.new(parsed_query_result_xml).result
+      QueryResultInterpreter.new(
+        doc: parsed_query_result_xml,
+        requested_title: @title
+      ).result
     end
 
     private
@@ -30,8 +33,12 @@ module LibraryAssistant
 
     def search_url_with_query
       uri = Addressable::URI.parse(BASE_SEARCH_URL)
-      uri.query_values = {query: "#{@title} #{@author} AND format:(book)"}
+      uri.query_values = {query: "#{title_without_subtitle} #{@author} AND format:(book)"}
       uri.to_s
+    end
+
+    def title_without_subtitle
+      @title.split(": ").first
     end
   end
 end

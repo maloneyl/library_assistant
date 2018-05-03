@@ -41,4 +41,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "addressable", "~> 2.5"
   spec.add_runtime_dependency "nokogiri", "~> 1.8"
   spec.add_runtime_dependency "goodreads", "~> 0.6"
+  spec.add_runtime_dependency "fuzzy-string-match", "~> 1.0"
 end
