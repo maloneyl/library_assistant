@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Maloney L."]
   spec.email         = ["maloneyl@users.noreply.github.com"]
 
-  spec.summary       = "A gem that grabs books from a Goodreads shelf and finds it in the Islington Library"
+  spec.summary       = "A gem that grabs books from a Goodreads shelf and finds them in the Islington Library"
   spec.description   = spec.summary
   spec.homepage      = "https://github.com/maloneyl/library_assistant"
   spec.license       = "MIT"
@@ -35,6 +35,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "factory_bot", "~> 4.0"
   spec.add_development_dependency "faker", "~> 1.8"
+  spec.add_development_dependency "pry-byebug", "~> 3.6"
 
   spec.add_runtime_dependency "dotenv", "~> 2.2"
   spec.add_runtime_dependency "addressable", "~> 2.5"
